@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Metodos del prototipo Function</title>
+</head>
+
+<body>
+
+    <ul>
+        <li><button class="call-to-action">Aprender</button></li>
+        <li><button class="call-to-action">Aprender</button></li>
+        <li><button class="call-to-action">Aprender</button></li>
+    </ul>
+
+    <script>
+        function saludar(){
+            console.log(`Hola soy ${this.name} ${this.apellido}`)
+        }
+
+        const richard = {
+            name: 'Richard',
+            apellido: 'Ponce'
+        }
+
+        saludar.call(richard)
+
+        function caminar(metros, direccion){
+            console.log(`${this.name} camina ${metros} metros hacia el ${direccion}`)
+        }
+
+        caminar.call(richard, 400, 'norte')
+        const valores = [800, 'sur'];
+        caminar.apply(richard, valores)
+
+        /*
+          Call - comas
+          Apply - Array
+        */
+
+        const daniel = {
+            name: 'Daniel',
+            apellido: 'Sanchez'
+        }
+
+        const danielSaluda = saludar.bind(daniel)
+        danielSaluda();
+
+        // const danielCamina = caminar.bind(daniel, 500, 'oeste')
+        // danielCamina();
+        const danielCamina = caminar.bind(daniel, 500)
+        danielCamina('oeste');
+
+        const buttons = document.querySelectorAll('.call-to-action')
+
+        // Usamos buttons como contexto, como THIS
+        Array.prototype.forEach.call(buttons, button => {
+            console.log('Hola');
+            button.onclick = () => alert('Nunca pares de aprender')
+        })
+    </script>
+</body>
+
+</html>
