@@ -7,7 +7,6 @@ self.addEventListener('install', event => {
 
 self.addEventListener('fetch', event =>{
     const request = event.request;
-    console.log(request);
     
     if (request.method != 'GET') {
         return;
@@ -23,14 +22,14 @@ self.addEventListener('fetch', event =>{
 async function precache() {
     const cache = await caches.open(VERSION);
     return cache.addAll([
-        '/',
-        '/index.html',
-        '/assets/index.js',
-        '/assets/MediaPlayer.js',
-        '/assets/plugins/AutoPlay.js',
-        '/assets/plugins/AutoPause.js',
-        '/assets/index.css',
-        '/assets/PezPayaso.mp4',
+        // '/',
+        // '/index.html',
+        // '/assets/index.js',
+        // '/assets/MediaPlayer.js',
+        // '/assets/plugins/AutoPlay.js',
+        // '/assets/plugins/AutoPause.js',
+        // '/assets/index.css',
+        // '/assets/PezPayaso.mp4',
     ]);
 }
 
@@ -43,8 +42,6 @@ async function cachedResponse(request){
 
 async function updateCache(request){
     const cache = await caches.open(VERSION);
-    const response = await fetch(request)
-    console.log(response);
-    
+    const response = await fetch(request)    
     return cache.put(request, response)
 }
